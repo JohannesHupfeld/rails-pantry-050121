@@ -1,0 +1,9 @@
+<h1>All Items</h1>
+<% @items.each do |item| %>
+  <!-- <li><a href="/items/<%= item.id %>"><%= item.name %></a></li> 
+  <li><%= link_to(item.name, "/items/#{item.id}") %></li> -->          
+  <li><%= link_to item.name, item_path(item) %></li>  
+  <!--  THESE ALL DO THE SAME THING -- the first is the most "manual" and the last being more abstract, 
+  it uses link_to and item_path helper methods. link_to is an ActionView method and item_path became available when we
+  set up our route. All view helper methods come from ActionView -->             
+<% end %>

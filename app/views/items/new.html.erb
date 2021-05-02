@@ -1,0 +1,26 @@
+<h3>form_for</h3>
+<%= form_for(@item) do |f| %> <!-- Yields an argument(f) that is an instance of the form builder class-->
+  <%= f.label "Item Name:" %>
+  <%= f.text_field :name %>
+  <%= f.submit "Submit" %>
+
+<% end %>
+
+<!--
+<h3>form_tag</h3>
+<%= form_tag items_path do %>  form_tag is a method that accepts an argument of a path and take a block. items_path is just a method that returns a string "/items" 
+  <%= label_tag "Item Name:" %>
+  <%= text_field_tag "name" %>
+  <%= submit_tag "submit" %>
+<% end %>
+
+<h3>Manual Form</h3>  How we did it in sinatra 
+<form action="/items" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  
+  <label> Item Name: </label>
+  <input type="text" name="name">
+  
+  <input type="submit" value="submit">
+</form>
+-->
