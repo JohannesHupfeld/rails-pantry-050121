@@ -18,14 +18,42 @@ class ItemsController < ApplicationController
 
   #post '/items'
   def create # Creating the post
-    item = Item.create(params.require(:item).permit(:name))
-    redirect_to item_path(item)
+    @item = Item.new (item_params) # Item.new does not hit the database until @item.save passes if it is unique and present.
+    if @item.save
+      redirect_to item_path(@item)
+    else
+      # redirect_to new_item_path  # This take us back to the new controller action (wipes away what we wrote in the text_field)
+      render :new # This renders back a view form (requires an instance of the object therefore @item)
+    end
+
+    # item = Item.create(item_params) # Item.create hits the database and is rolledback if not valid?
+    # if item.valid?
+      # redirect_to item_path(item)
+    # else
+      # redirect_to new_item_path
+    # end
   end
 
   def edit
+    @item = Item.find_by(id: params[:id])
   end
 
   def update
+    item = Item.find_by(id: params[:id])
+    item.update(item_params)
+    redirect_to item_path(item) 
   end
+
+  def destroy
+    item = Item.find_by(id: params[:id]) 
+    item.delete
+    redirect_to items_path
+  end
+
+  private
+
+    def item_params # Instance method
+      params.require(:item).permit(:name)
+    end
 
 end 

@@ -1,0 +1,5 @@
+<%= form_for(@item) do |f| %> <!-- Yields an argument(f) that is an instance of the form builder class-->
+  <%= f.label "Item Name:" %>
+  <%= f.text_field :name %>
+  <%= f.submit "Submit" %>
+<% end %>

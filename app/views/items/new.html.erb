@@ -1,9 +1,9 @@
-<h3>form_for</h3>
+<h3>Add a New Item</h3> <!-- form_for method -->
+
 <%= form_for(@item) do |f| %> <!-- Yields an argument(f) that is an instance of the form builder class-->
   <%= f.label "Item Name:" %>
   <%= f.text_field :name %>
   <%= f.submit "Submit" %>
-
 <% end %>
 
 <!--

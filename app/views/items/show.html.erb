@@ -1,3 +1,19 @@
 <h1>Show Page</h1>
 
 <p><%= @item.name %></p>
+
+<%= link_to "Edit", edit_item_path(@item) %>
+
+<br>
+
+<%= link_to("Delete", @item, method: :delete, data: {confirm: "Are you sure you want to delete this item?"}) %>    <!-- using link_to to make a delete link - uses javascript to create a form and then deletes -->
+
+<!--
+<%= button_to("Delete", @item, method: :delete) %>   -Using button_to to make a delete button 
+-->
+
+<!--
+<%= form_for(@item, method: :delete) do |f| %>       - Using form_for to make a delete link 
+  <%= f.submit "Delete" %>
+<% end %>
+-->
