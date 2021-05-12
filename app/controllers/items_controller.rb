@@ -23,6 +23,7 @@ class ItemsController < ApplicationController
       redirect_to item_path(@item)
     else
       # redirect_to new_item_path  # This take us back to the new controller action (wipes away what we wrote in the text_field)
+      @errors = @item.errors.full_messages 
       render :new # This renders back a view form (requires an instance of the object therefore @item)
     end
 
@@ -39,9 +40,13 @@ class ItemsController < ApplicationController
   end
 
   def update
-    item = Item.find_by(id: params[:id])
-    item.update(item_params)
-    redirect_to item_path(item) 
+    @item = Item.find_by(id: params[:id])
+    if @item.update(item_params)
+      redirect_to item_path(@item) 
+    else
+      @errors = @item.errors.full_messages 
+      render :edit
+    end
   end
 
   def destroy

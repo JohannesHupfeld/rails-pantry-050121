@@ -1,6 +1,10 @@
-<h3>Add a New Item</h3> <!-- form_for method -->
+<h3>Add a New Item</h3> 
 
-<%= form_for(@item) do |f| %> <!-- Yields an argument(f) that is an instance of the form builder class-->
+<% @errors && @errors.each do |e| %> <!-- first @errors checks if there is any errors-->
+  <ul><%= e %></ul>
+<% end %>
+
+<%= form_for(@item) do |f| %> <!-- Yields an argument(f) that is an instance of the form builder class--><!-- form_for method -->
   <%= f.label "Item Name:" %>
   <%= f.text_field :name %>
   <%= f.submit "Submit" %>
