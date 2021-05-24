@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Item.create([{ name: 'Sugar' }, { name: 'Salt' }, { name: 'Flour' }, { name: 'Cinnamon' }, { name: 'Pasta' }])
+
+Measurement.create([{item_id: 1, quantity: 1, unit: "Cup"}, {item_id: 2, quantity: 1, unit: "Container"},{item_id: 3, quantity: 3, unit: "Bags"},{item_id: 4, quantity: 2, unit: "Containers"},{item_id: 5, quantity: 1, unit: "Box"},{item_id: 5, quantity: 3, unit: "Boxes"}])

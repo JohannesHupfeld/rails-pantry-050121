@@ -1,4 +1,7 @@
 class ItemsController < ApplicationController
+
+    layout "application"
+
   def index
     # render(:index) # Not neccesary to write this code because rails will look for a floder called items 
                      # since we are in the ItemsController and look for look for a file called about. You 
@@ -8,12 +11,14 @@ class ItemsController < ApplicationController
 
   def show 
     @item = Item.find_by(id: params[:id])
+    #@measurements = @item.measurements # replaced with local views/measurements/index.html.erb
   end
 
   #get '/items'
   def new # Seeing the form 
-    @item = Item.new # using new instead of create becuase we dont want to save the object here, we want to 
+    @item = Item.new # Using new instead of create becuase we dont want to save the object here, we want to 
                      # make a placeholder so that form_for in new.html.erb knows how to set up that form.
+    @item.measurements.build # Builds the quantity and unit inputs in views/items/new  
   end
 
   #post '/items'
@@ -58,7 +63,7 @@ class ItemsController < ApplicationController
   private
 
     def item_params # Instance method
-      params.require(:item).permit(:name)
+      params.require(:item).permit(:name, measurements_attributes: [:unit, :quantity])
     end
 
 end 

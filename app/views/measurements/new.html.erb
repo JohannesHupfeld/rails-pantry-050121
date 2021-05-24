@@ -1,0 +1,13 @@
+<% @errors && @errors.each do |e| %>
+  <li><%=e%></li>
+<%end%>
+
+<%= form_for(@measurement) do |f| %>
+  <%= f.label "Quantity"%>
+  <%= f.number_field :quantity %>
+  <%= f.label "Units" %>
+  <%= f.text_field :unit %>
+  <%= f.label "Item" %> 
+  <%= f.collection_select(:item_id, @items, :id, :name) %>
+  <%= f.submit("Save") %>
+<% end%>

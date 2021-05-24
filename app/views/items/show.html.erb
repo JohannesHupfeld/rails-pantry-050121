@@ -2,6 +2,8 @@
 
 <p><%= @item.name %></p>
 
+<%= render partial: 'measurements/measurements', locals: {measurements: @item.measurements} %>
+
 <%= link_to "Edit", edit_item_path(@item) %>
 
 <br>

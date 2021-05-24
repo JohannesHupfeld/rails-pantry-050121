@@ -1,0 +1,12 @@
+<%= form_for(@item) do |f| %> <!-- Yields an argument(f) that is an instance of the form builder class--><!-- form_for method -->
+  <%= f.label "Item Name:" %>
+  <%= f.text_field :name %></br>
+  <%= f.label "Measurement:" %>
+  <%= f.fields_for :measurements do |m| %>
+    <%= m.label "Quantity" %>
+    <%= m.number_field :quantity %>
+    <%= m.label "Units" %>
+    <%= m.text_field :unit %>
+  <% end %>
+  <%= f.submit "Submit" %>
+<% end %>

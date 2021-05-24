@@ -1,15 +1,25 @@
 <h3>Add a New Item</h3> 
 
 <% @errors && @errors.each do |e| %> <!-- first @errors checks if there is any errors-->
-  <ul><%= e %></ul>
+  <li><%= e %></li>
 <% end %>
 
-<%= form_for(@item) do |f| %> <!-- Yields an argument(f) that is an instance of the form builder class--><!-- form_for method -->
+<%= render 'form' %>
+
+<!--
+<%= form_for(@item) do |f| %> <!-- Yields an argument(f) that is an instance of the form builder class--><!-- form_for method --> <!--
   <%= f.label "Item Name:" %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name %></br>
+  <%= f.label "Measurement:" %>
+  <%= f.fields_for :measurements do |m| %>
+    <%= m.label "Quantity" %>
+    <%= m.number_field :quantity %>
+    <%= m.label "Units" %>
+    <%= m.text_field :unit %>
+  <% end %>
   <%= f.submit "Submit" %>
 <% end %>
-
+-->
 <!--
 <h3>form_tag</h3>
 <%= form_tag items_path do %>  form_tag is a method that accepts an argument of a path and take a block. items_path is just a method that returns a string "/items" 
