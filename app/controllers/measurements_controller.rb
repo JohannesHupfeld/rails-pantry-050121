@@ -16,8 +16,6 @@ class MeasurementsController < ApplicationController
     redirect_to items_path
   end
 
-
-
   private
 
     def measurement_params

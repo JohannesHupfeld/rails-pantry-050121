@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
 
   #post '/items'
   def create # Creating the post
-    @item = Item.new (item_params) # Item.new does not hit the database until @item.save passes if it is unique and present.
+    @item = Item.new(item_params) # Item.new does not hit the database until @item.save passes if it is unique and present.
     if @item.save
       redirect_to item_path(@item)
     else
