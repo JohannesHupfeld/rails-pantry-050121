@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
   end
 
   def show 
-    # set_item #replaced with before action
+     # set_item #replaced with before action
     #@measurements = @item.measurements # replaced with local views/measurements/index.html.erb
   end
 
@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    # set_item #replaced with before action
+     # set_item #replaced with before action
     if @item.update(item_params)
       redirect_to item_path(@item) 
     else
@@ -59,8 +59,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    # set_item #replaced with before action
-    item.delete
+    # set_item #replaced with before action 
+    @item.delete
     redirect_to items_path
   end
 
@@ -71,7 +71,7 @@ class ItemsController < ApplicationController
     end
 
     def set_item
-      item = Item.find_by(id: params[:id])
+      @item = Item.find_by(id: params[:id])
     end
 
 end 

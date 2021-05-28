@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   validate :is_title_case
   before_validation :make_title_case # trying to change your data before you save it  
   has_many :measurements 
+  has_many :users, through: :measurements
 
   accepts_nested_attributes_for :measurements # Since an item has many measurements we make it plural # OK when we dont have a has_many
 
