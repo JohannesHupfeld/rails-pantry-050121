@@ -1,5 +1,9 @@
 class ItemsController < ApplicationController
 
+  before_action(:set_item, except: [:index, :new, :create])
+  # before_action(:set_item, only: [:show, :edit, :update, :destroy]) # You can use except(above) or only 
+  
+
     layout "application"
 
   def index
@@ -10,7 +14,7 @@ class ItemsController < ApplicationController
   end
 
   def show 
-    @item = Item.find_by(id: params[:id])
+    # set_item #replaced with before action
     #@measurements = @item.measurements # replaced with local views/measurements/index.html.erb
   end
 
@@ -41,11 +45,11 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find_by(id: params[:id])
+    # set_item #replaced with before action
   end
 
   def update
-    @item = Item.find_by(id: params[:id])
+    # set_item #replaced with before action
     if @item.update(item_params)
       redirect_to item_path(@item) 
     else
@@ -55,7 +59,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find_by(id: params[:id]) 
+    # set_item #replaced with before action
     item.delete
     redirect_to items_path
   end
@@ -64,6 +68,10 @@ class ItemsController < ApplicationController
 
     def item_params # Instance method
       params.require(:item).permit(:name, measurements_attributes: [:unit, :quantity])
+    end
+
+    def set_item
+      item = Item.find_by(id: params[:id])
     end
 
 end 

@@ -2,7 +2,7 @@
 
 <p><%= @item.name %></p>
 
-<%= render partial: 'measurements/measurements', locals: {measurements: @item.measurements} %>
+<%= render partial: 'measurements/measurements', locals: {measurements: @item.measurements, index: false} %>
 
 <%= link_to "Edit", edit_item_path(@item) %>
 

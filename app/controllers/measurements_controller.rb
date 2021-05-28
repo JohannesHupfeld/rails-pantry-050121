@@ -3,7 +3,11 @@ class MeasurementsController < ApplicationController
     layout "application"
 
   def index
-    @measurements = Measurement.all
+    if params[:quantity] # Did the user use the search bar
+      @measurements = Measurement.quantity_search(params[:quantity])
+    else
+      @measurements = Measurement.all
+    end
   end
   
   def new # New instantiates an object to work within the form
