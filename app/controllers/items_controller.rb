@@ -10,7 +10,12 @@ class ItemsController < ApplicationController
     # render(:index) # Not neccesary to write this code because rails will look for a floder called items 
                      # since we are in the ItemsController and look for look for a file called about. You 
                      # technically dont even need the about method becuase rails will figure it out from your get request.
-    @items = Item.all                  
+    if params[:user_id]
+      user = User.find_by(id: params[:user_id])
+      @items = user.items
+    else                 
+      @items = Item.all       
+    end           
   end
 
   def show 

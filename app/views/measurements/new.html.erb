@@ -2,12 +2,18 @@
   <li><%=e%></li>
 <%end%>
 
-<%= form_for(@measurement) do |f| %>
+<% if @item %>
+  <h3><%= @item.name %></h3>
+<% end %>
+
+<%= form_for(@measurement, url: form_url_helper(@item)) do |f| %>
   <%= f.label "Quantity"%>
   <%= f.number_field :quantity %>
   <%= f.label "Units" %>
   <%= f.text_field :unit %>
-  <%= f.label "Item" %> 
-  <%= f.collection_select(:item_id, @items, :id, :name) %>
+  <% if !@item %>
+    <%= f.label "Item" %> 
+    <%= f.collection_select(:item_id, @items, :id, :name) %>
+  <% end %>
   <%= f.submit("Save") %>
 <% end%>

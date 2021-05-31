@@ -1,12 +1,10 @@
-<h1>Show Page</h1>
+<h1><%= @item.name %></h1>
 
-<p><%= @item.name %></p>
+<%= render partial: 'measurements/measurements', locals: {measurements: @item.measurements, index: false} %><br>
 
-<%= render partial: 'measurements/measurements', locals: {measurements: @item.measurements, index: false} %>
-
-<%= link_to "Edit", edit_item_path(@item) %>
-
-<br>
+<%= link_to "Add Item to Pantry", new_item_measurement_path(@item) %><br>
+ 
+<%= link_to "Edit", edit_item_path(@item) %><br>
 
 <%= link_to("Delete", @item, method: :delete, data: {confirm: "Are you sure you want to delete this item?"}) %>    <!-- using link_to to make a delete link - uses javascript to create a form and then deletes -->
 
