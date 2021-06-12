@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :users do 
-    resources :items
+  # match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+  resources :users, except: [:new, :create] do 
+    resources(:items)
   end
   
   resources :items do  
@@ -14,6 +15,11 @@ Rails.application.routes.draw do
   # resources(:items, only: [:show, :index]) # this will only run show and index 
 
   resources :measurements # this will create 8 requests (run rails routes --expanded to see them)
+  get '/signup', to: "users#new", as: "signup" # as signup means itll show as /signup in url
+  post '/signup', to: "users#create"
+  get '/login', to: "sessions#new", as: "login"
+  post '/login', to: "sessions#create"
+  post '/logout', to: "sessions#destory"
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

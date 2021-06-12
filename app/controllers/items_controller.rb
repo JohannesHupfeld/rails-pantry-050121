@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
 
   before_action(:set_item, except: [:index, :new, :create])
   # before_action(:set_item, only: [:show, :edit, :update, :destroy]) # You can use except(above) or only 
+  # skip_before_action :set_item, only: [:index, :new, :create]
   
 
     layout "application"
