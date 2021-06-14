@@ -1,10 +1,13 @@
 class SessionsController < ApplicationController
   def new
+    
   end
 
   def create
   end
 
-  def destory
+  def destroy
+    session.clear
+    redirect_to '/signup'
   end
 end

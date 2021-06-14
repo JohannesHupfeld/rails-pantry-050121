@@ -1,0 +1,13 @@
+<h1> Log In</h1>
+
+<% @errors && @errors.each do |e| %> <!-- first @errors checks if there is any errors-->
+  <li><%= e %></li>
+<% end %>
+
+<%= form_tag login_path do %>
+  <%= label "Username" %>
+  <%= text_field :username %>
+  <%= label "Password" %>
+  <%= password_field :password %>
+  <%= submit_tag "Log In" %>
+<% end %> 

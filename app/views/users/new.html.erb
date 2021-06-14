@@ -1,5 +1,9 @@
 <h1> Sign Up</h1>
 
+<% @errors && @errors.each do |e| %> <!-- first @errors checks if there is any errors-->
+  <li><%= e %></li>
+<% end %>
+
 <%= form_for @user, url: signup_path do |f| %>
   <%= f.label "Username" %>
   <%= f.text_field :username %>
