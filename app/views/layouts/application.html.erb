@@ -21,6 +21,7 @@
     <% else %>
       <%= link_to 'Log In', login_path %>
       <%= link_to 'Sign Up', signup_path %>
+      <%= link_to "Sign up with Facebook", '/auth/facebook', method: :post%>
     <% end %>
 
     <%= yield %>

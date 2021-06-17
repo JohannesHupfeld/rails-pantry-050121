@@ -7,13 +7,12 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to items_path
+      redirect_to user_items_path(@user)
     else
       @errors = @user.errors.full_messages
       render :new
     end
   end
-
 
   private
 
