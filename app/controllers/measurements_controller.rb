@@ -24,8 +24,8 @@ class MeasurementsController < ApplicationController
   def create # Create actually saves it to the database
     @measurement = Measurement.create(measurement_params)
     @measurement.user = current_user
-    if params(:item_id)
-      @measurement.item = params(:item_id)
+    if params[:item_id]
+      @measurement.item_id = params[:item_id]
     end
     @measurement.save
     redirect_to items_path
