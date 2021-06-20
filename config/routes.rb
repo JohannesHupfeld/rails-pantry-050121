@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
-  resources :users, except: [:new, :create] do 
+  resources :users, except: [:new, :create, :show, :index, :destroy, :patch] do 
     resources(:items)
   end
   

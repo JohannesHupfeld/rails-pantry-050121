@@ -1,8 +1,6 @@
 <h3> Edit Item </h3>
  
-<% @errors && @errors.each do |e| %> <!-- first @errors checks if there is any errors-->
-  <ul><%= e %></ul>
-<% end %>
+<%= render(partial: "application/errors", locals: {errors: @item.errors.full_messages}) %>
 
 <%= render 'form' %>
 <!--

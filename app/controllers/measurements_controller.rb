@@ -1,5 +1,5 @@
 class MeasurementsController < ApplicationController
-
+  before_action(:require_login)
     layout "application"
 
   def index
@@ -25,10 +25,15 @@ class MeasurementsController < ApplicationController
     @measurement = Measurement.create(measurement_params)
     @measurement.user = current_user
     if params[:item_id]
-      @measurement.item_id = params[:item_id]
+      @measurement.item_id = params[:item_id]  # this is if we come in through the nested route item/1/measurement/new
     end
-    @measurement.save
-    redirect_to items_path
+    if @measurement.save
+      redirect_to items_path
+    else
+      @errors = @measurement.errors.full_messages 
+      @items = Item.all
+      render :new
+    end
   end
 
   private

@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action(:set_item, except: [:index, :new, :create])
   # before_action(:set_item, only: [:show, :edit, :update, :destroy]) # You can use except(above) or only 
   # skip_before_action :set_item, only: [:index, :new, :create]
+  before_action(:require_login) # are only invoked before our action/ restful routing actions so not the private methods
   
 
     layout "application"
@@ -26,14 +27,15 @@ class ItemsController < ApplicationController
 
   #get '/items'
   def new # Seeing the form 
-    @item = Item.new # Using new instead of create becuase we dont want to save the object here, we want to 
-                     # make a placeholder so that form_for in new.html.erb knows how to set up that form.
-    @item.measurements.build # Builds the quantity and unit inputs in views/items/new  
+    @item = Item.new # Using new instead of create becuase we dont want to save the object here, we want to make a placeholder so that form_for in new.html.erb knows how to set up that form.
+    @item.measurements.build(user: current_user) # Builds the quantity and unit inputs in views/items/new  
+    @measurements = @item.measurements.select{|m| m.user_id == current_user.id}
   end
 
   #post '/items'
   def create # Creating the post
     @item = Item.new(item_params) # Item.new does not hit the database until @item.save passes if it is unique and present.
+    @item.measurements.each {|m| m.user = current_user} #Before we save this item we need to iterate through all the measurements and give each mesasurement a user attribute of the current user
     if @item.save
       redirect_to item_path(@item)
     else
@@ -52,6 +54,7 @@ class ItemsController < ApplicationController
 
   def edit
     # set_item #replaced with before action
+    @measurements = @item.measurements.where(user_id: current_user.id)
   end
 
   def update
@@ -59,7 +62,8 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to item_path(@item) 
     else
-      @errors = @item.errors.full_messages 
+      # @errors = @item.errors.full_messages # we now send @item.errors.full_messages _errors partial in the item/new.erb view
+      @measurements = @item.measurements.select{|m| m.user_id == current_user.id}
       render :edit
     end
   end
@@ -73,7 +77,7 @@ class ItemsController < ApplicationController
   private
 
     def item_params # Instance method
-      params.require(:item).permit(:name, measurements_attributes: [:unit, :quantity])
+      params.require(:item).permit(:name, measurements_attributes: [:unit, :quantity, :user_id, :id])
     end
 
     def set_item

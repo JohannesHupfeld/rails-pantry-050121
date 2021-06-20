@@ -6,13 +6,18 @@ class Item < ApplicationRecord
   has_many :measurements 
   has_many :users, through: :measurements
 
-  accepts_nested_attributes_for :measurements # Since an item has many measurements we make it plural # OK when we dont have a has_many
+  # accepts_nested_attributes_for :measurements # Since an item has many measurements we make it plural # OK when we dont have a has_many
 
-  # def measurements_attributes=(attrs) # Necessary to define yourself when we have a has_many  
-  #   attrs.values.each do |hash|
-  #     self.measurements.build(hash)
-  #   end
-  # end                                 # Same as the macro above but doesnt work when we start using has_many relationships 
+  def measurements_attributes=(attrs) # Necessary to define yourself when we have a has_many  
+    attrs.values.each do |hash|
+      if hash[:id]
+        m = Measurement.find_by(id: hash[:id])
+        m.update(hash)
+      else
+        self.measurements.build(hash)
+      end
+    end
+  end                                 # Same as the macro above but doesnt work when we start using has_many relationships 
 
   def is_title_case
     if self.name != self.name.titlecase

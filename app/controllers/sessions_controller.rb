@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    
+    @errors = []
   end
 
   def create
@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
       render :new
     else
       @errors = ["Invalid Username"]
+      render :new
     end
   end
 

@@ -2,11 +2,12 @@
   <%= f.label "Item Name:" %>
   <%= f.text_field :name %></br>
   <%= f.label "Measurement:" %>
-  <%= f.fields_for :measurements do |m| %>
+  <%= f.fields_for :measurements, @measurements do |m| %>
     <%= m.label "Quantity" %>
     <%= m.number_field :quantity %>
     <%= m.label "Units" %>
     <%= m.text_field :unit %>
+    <%# m.hidden_field :user_id, value: current_user.id %> <%#this associates a new item to the current user signed in%>
   <% end %>
   <%= f.submit "Submit" %>
 <% end %>
